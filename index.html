@@ -33,8 +33,10 @@
 
         .signin-form {
             width: 350px;
-            text-align: center;
             padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centrar todo el contenido dentro del formulario */
             border-radius: 10px;
             background-color: transparent;
         }
@@ -43,16 +45,23 @@
             color: #333;
             font-size: 1.8em;
             margin-bottom: 20px;
+            text-align: center;
         }
 
         .signin-form input {
-            display: block;
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
             font-size: 1em;
             border: 1px solid #ccc;
             border-radius: 5px;
+            text-align: center;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center; /* Centra el botón en el contenedor */
+            margin-top: 10px;
         }
 
         .signin-form button {
@@ -65,8 +74,6 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin: 0 auto; /* Centrar el botón */
-            display: block;
         }
 
         .signin-form button:disabled {
@@ -86,7 +93,9 @@
                 <h1>Inicio de Sesión</h1>
                 <input type="text" id="username" placeholder="Usuario">
                 <input type="password" id="password" placeholder="Contraseña">
-                <button id="loginButton" disabled>Iniciar sesión</button>
+                <div class="button-container">
+                    <button id="loginButton" disabled>Iniciar sesión</button>
+                </div>
             </div>
         </div>
     </div>
