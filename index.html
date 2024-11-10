@@ -102,6 +102,33 @@
         usernameInput.addEventListener('input', toggleButtonState);
         passwordInput.addEventListener('input', toggleButtonState);
         loginButton.addEventListener('click', validateLogin);
+
+        // Detectar cuando el usuario intenta abrir las herramientas de desarrollo
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I") || (event.ctrlKey && event.shiftKey && event.key === "C")) {
+                alert("No puedes inspeccionar este sitio.");
+                event.preventDefault(); // Evita que se abra la herramienta de inspección
+            }
+        });
+
+        // Detectar el uso de las herramientas de desarrollo a través de la apertura de la consola
+        let devtoolsOpen = false;
+        Object.defineProperty(window, 'devtools', {
+            get: function () {
+                devtoolsOpen = true;
+                alert("No puedes inspeccionar este sitio.");
+                return {};
+            }
+        });
+
+        // Verificar si las herramientas de desarrollo están abiertas
+        setInterval(function () {
+            if (devtoolsOpen) {
+                alert("No puedes inspeccionar este sitio.");
+                devtoolsOpen = false;
+            }
+        }, 1000);
+
     </script>
 </body>
 </html>
