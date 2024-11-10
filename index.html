@@ -1,110 +1,4 @@
-[1:14 p.m., 10/11/2024] Carletes: <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knotion Login</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            background-image: url('knotionback.png');
-            background-size: cover;
-            background-position: center;
-        }
-        .login-container {
-            text-align: center;
-        }
-        .login-container h1 {
-            color: white;
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-        .login-input {
-            display: block;
-            width: 250px;
-            padding: 10px;
-            margin: 10px auto;
-            font-size: 1em;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .login-button {
-            width: 270px;
-            padding: 10px;
-            font-size: 1em;
-            color: white;
-            background-color: gray;
-            border: none;
-            border-radius: 5px;
-            cursor: not-allowed;
-        }
-        .login-button.enabled {
-            background-color: blue;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <h1>Knotion</h1>
-        <input type="text" class="login-input" id="username" placeholder="Usuario">
-        <input type="password" class="login-input" id="password" placeholder="Contraseña">
-        <button class="login-button" id="loginButton" disabled>Iniciar sesión</button>
-    </div>
-
-    <script>
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-        const loginButton = document.getElementById('loginButton');
-
-        function toggleButtonState() {
-            if (usernameInput.value.trim() !== '' && passwordInput.value.trim() !== '') {
-                loginButton.disabled = false;
-                loginButton.classList.add('enabled');
-            } else {
-                loginButton.disabled = true;
-                loginButton.classList.remove('enabled');
-            }
-        }
-
-        function validateLogin() {
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value.trim();
-
-            if (username === "webgames" && password === "playnow") {
-                const url = "https://dreamboxmath.vercel.app/inicio.html";
-                let win = window.open();
-
-                win.document.body.style.margin = '0';
-                win.document.body.style.height = '100vh';
-
-                const iframe = win.document.createElement('iframe');
-                iframe.style.border = 'none';
-                iframe.style.width = '100%';
-                iframe.style.height = '100%';
-                iframe.style.margin = '0';
-                iframe.src = url;
-
-                win.document.body.appendChild(iframe);
-            } else {
-                alert("Usuario o contraseña incorrectos. Inténtelo de nuevo.");
-            }
-        }
-
-        usernameInput.addEventListener('input', toggleButtonState);
-        passwordInput.addEventListener('input', toggleButtonState);
-        loginButton.addEventListener('click', validateLogin);
-    </script>
-</body>
-</html>
-[1:32 p.m., 10/11/2024] Carletes: <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -154,7 +48,7 @@
             transition: background-color 0.3s;
         }
         .login-button.enabled {
-            background-color: #579adc; /* Color actualizado */
+            background-color: #579adc;
             cursor: pointer;
         }
     </style>
@@ -221,11 +115,9 @@
                     win.document.body.appendChild(iframe);
                 } else {
                     alert("Contraseña incorrecta. Inténtelo de nuevo.");
-                    window.location.href = "https://knotion.com"; // Redirección a Knotion
                 }
             } else {
                 alert("Usuario no encontrado. Inténtelo de nuevo.");
-                window.location.href = "https://knotion.com"; // Redirección a Knotion
             }
         }
 
