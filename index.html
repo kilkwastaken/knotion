@@ -52,6 +52,9 @@
             background-color: #579adc;
             cursor: pointer;
         }
+        .hidden-content {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -59,6 +62,10 @@
         <input type="text" class="login-input" id="username" placeholder="Usuario">
         <input type="password" class="login-input" id="password" placeholder="Contraseña">
         <button class="login-button" id="loginButton" disabled>Iniciar sesión</button>
+    </div>
+
+    <div class="hidden-content">
+        <p>No puedes ver aquí, perro 😲</p>
     </div>
 
     <script>
@@ -75,18 +82,25 @@
 
         // Función para calcular el hash SHA-256
         async function sha256(message) {
-            try {
-                const msgBuffer = new TextEncoder().encode(message);
-                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-                const hashArray = Array.from(new Uint8Array(hashBuffer));
-                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-            } catch (error) {
-                console.error("Error al calcular el hash:", error);
-                alert("Hubo un problema con la autenticación. Inténtelo de nuevo más tarde.");
-                return null;
-            }
+            const msgBuffer = new TextEncoder().encode(message); // Convierte el mensaje en bytes
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer); // Calcula el hash
+            const hashArray = Array.from(new Uint8Array(hashBuffer)); // Convierte el buffer en un array de bytes
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // Convierte cada byte en hex y los concatena
         }
 
+        // Detectar si se están utilizando las herramientas de desarrollador
+        const detectDevTools = () => {
+            const devTools = /./;
+            devTools.toString = () => {
+                document.querySelector('.hidden-content').style.display = 'block';
+            };
+            console.log(devTools);
+        };
+
+        // Llamada a la función de detección de herramientas de desarrollador
+        detectDevTools();
+
+        // Habilitar/Deshabilitar el botón según el contenido de los campos
         function toggleButtonState() {
             if (usernameInput.value.trim() !== '' && passwordInput.value.trim() !== '') {
                 loginButton.disabled = false;
@@ -97,14 +111,16 @@
             }
         }
 
+        // Función de validación de inicio de sesión
         async function validateLogin() {
-            const username = usernameInput.value.trim().toLowerCase();
+            const username = usernameInput.value.trim().toLowerCase(); // Convertir a minúsculas para evitar errores de mayúsculas
             const password = passwordInput.value.trim();
 
             if (storedCredentials[username]) {
                 const passwordHash = await sha256(password);
 
-                if (passwordHash && passwordHash === storedCredentials[username]) {
+                // Comparar el hash de la contraseña ingresada con el hash almacenado
+                if (passwordHash === storedCredentials[username]) {
                     const url = "https://dreamboxmath.vercel.app/inicio.html";
                     let win = window.open();
 
@@ -127,6 +143,7 @@
             }
         }
 
+        // Agregar eventos a los campos de entrada y el botón
         usernameInput.addEventListener('input', toggleButtonState);
         passwordInput.addEventListener('input', toggleButtonState);
         loginButton.addEventListener('click', validateLogin);
