@@ -19,7 +19,6 @@
         .main-wrapper {
             height: 100%;
             width: 100%;
-            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -27,7 +26,6 @@
 
         .signin-wrapper {
             width: 100%;
-            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -38,7 +36,7 @@
             text-align: center;
             padding: 30px;
             border-radius: 10px;
-            background-color: transparent; /* Hacer el contenedor invisible */
+            background-color: transparent;
         }
 
         .signin-form h1 {
@@ -58,16 +56,17 @@
         }
 
         .signin-form button {
-            margin-top: 10px;
             background-color: #579adc;
             color: white;
-            width: 100%; /* Ajustar el botón al mismo ancho que los campos de entrada */
+            width: 150px; /* Tamaño más pequeño */
             padding: 10px;
             font-size: 1em;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin: 0 auto; /* Centrar el botón */
+            display: block;
         }
 
         .signin-form button:disabled {
