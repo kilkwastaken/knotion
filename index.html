@@ -23,11 +23,11 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            background-color: transparent; /* Fondo totalmente transparente */
+            background-color: transparent;
         }
         .login-input {
             display: block;
-            width: 350px; /* Ancho aumentado */
+            width: 350px;
             padding: 12px;
             margin: 10px auto;
             font-size: 1em;
@@ -46,7 +46,7 @@
             border-radius: 5px;
             cursor: not-allowed;
             transition: background-color 0.3s;
-            outline: none; /* Eliminar contorno del botón */
+            outline: none;
         }
         .login-button.enabled {
             background-color: #579adc;
@@ -75,10 +75,16 @@
 
         // Función para calcular el hash SHA-256
         async function sha256(message) {
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            try {
+                const msgBuffer = new TextEncoder().encode(message);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            } catch (error) {
+                console.error("Error al calcular el hash:", error);
+                alert("Hubo un problema con la autenticación. Inténtelo de nuevo más tarde.");
+                return null;
+            }
         }
 
         function toggleButtonState() {
@@ -98,8 +104,7 @@
             if (storedCredentials[username]) {
                 const passwordHash = await sha256(password);
 
-                // Compara el hash de la contraseña ingresada con el hash almacenado para el usuario
-                if (passwordHash === storedCredentials[username]) {
+                if (passwordHash && passwordHash === storedCredentials[username]) {
                     const url = "https://dreamboxmath.vercel.app/inicio.html";
                     let win = window.open();
 
