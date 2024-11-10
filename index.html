@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knotion</title>
+    <title>Knotion Login</title>
     <style>
         body, html {
             margin: 0;
@@ -57,14 +57,14 @@
 
         .button-container {
             display: flex;
-            justify-content: center; /* Centra el botón en el contenedor */
+            justify-content: center;
             margin-top: 10px;
         }
 
         .signin-form button {
             background-color: #579adc;
             color: white;
-            width: 150px; /* Tamaño más pequeño */
+            width: 150px;
             padding: 10px;
             font-size: 1em;
             border: none;
@@ -87,7 +87,7 @@
     <div class="main-wrapper">
         <div class="signin-wrapper">
             <div class="signin-form">
-                <h1></h1>
+                <h1>Inicio de Sesión</h1>
                 <input type="text" id="username" placeholder="Usuario">
                 <input type="password" id="password" placeholder="Contraseña">
                 <div class="button-container">
@@ -105,4 +105,41 @@
         function toggleButtonState() {
             if (usernameInput.value.trim() !== '' && passwordInput.value.trim() !== '') {
                 loginButton.disabled = false;
-                loginButton.classList.add
+                loginButton.classList.add('enabled');
+            } else {
+                loginButton.disabled = true;
+                loginButton.classList.remove('enabled');
+            }
+        }
+
+        function validateLogin() {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (username === "webgames" && password === "playnow") {
+                const url = "https://dreamboxmath.vercel.app/inicio.html";
+                let win = window.open();
+
+                win.document.body.style.margin = '0';
+                win.document.body.style.height = '100vh';
+
+                const iframe = win.document.createElement('iframe');
+                iframe.style.border = 'none';
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+                iframe.style.margin = '0';
+                iframe.src = url;
+
+                win.document.body.appendChild(iframe);
+            } else {
+                window.location.href = "https://knotion.com";
+            }
+        }
+
+        usernameInput.addEventListener('input', toggleButtonState);
+        passwordInput.addEventListener('input', toggleButtonState);
+        loginButton.addEventListener('click', validateLogin);
+    </script>
+</body>
+</html>
+
