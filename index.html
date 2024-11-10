@@ -20,10 +20,10 @@
         }
         .login-container {
             text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            background-color: transparent;
         }
         .login-input {
             display: block;
@@ -52,9 +52,6 @@
             background-color: #579adc;
             cursor: pointer;
         }
-        .hidden-content {
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -64,43 +61,19 @@
         <button class="login-button" id="loginButton" disabled>Iniciar sesión</button>
     </div>
 
-    <div class="hidden-content">
-        <p>No puedes ver aquí, perro 😲</p>
-    </div>
-
     <script>
         const usernameInput = document.getElementById('username');
         const passwordInput = document.getElementById('password');
         const loginButton = document.getElementById('loginButton');
 
-        // Hashes almacenados para los usuarios y contraseñas
+        // Credenciales simples de ejemplo
         const storedCredentials = {
-            "webgames": "f4a0b9e5120b3ec46fead1647b80c75f7f3822d57b8e2a5989656446f5d5c64e", // Hash de "playnow"
-            "carletes": "8c6976e5b5410415bde908bd4dee15dfb16a7a60bfc48ac7e3776b9046b02e0b", // Hash de "admin"
-            "josele": "8c6976e5b5410415bde908bd4dee15dfb16a7a60bfc48ac7e3776b9046b02e0b"   // Hash de "admin"
+            "webgames": "playnow",  // Contraseña en texto claro
+            "carletes": "admin",
+            "josele": "admin"
         };
 
-        // Función para calcular el hash SHA-256
-        async function sha256(message) {
-            const msgBuffer = new TextEncoder().encode(message); // Convierte el mensaje en bytes
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer); // Calcula el hash
-            const hashArray = Array.from(new Uint8Array(hashBuffer)); // Convierte el buffer en un array de bytes
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // Convierte cada byte en hex y los concatena
-        }
-
-        // Detectar si se están utilizando las herramientas de desarrollador
-        const detectDevTools = () => {
-            const devTools = /./;
-            devTools.toString = () => {
-                document.querySelector('.hidden-content').style.display = 'block';
-            };
-            console.log(devTools);
-        };
-
-        // Llamada a la función de detección de herramientas de desarrollador
-        detectDevTools();
-
-        // Habilitar/Deshabilitar el botón según el contenido de los campos
+        // Habilitar o deshabilitar el botón según si los campos están llenos
         function toggleButtonState() {
             if (usernameInput.value.trim() !== '' && passwordInput.value.trim() !== '') {
                 loginButton.disabled = false;
@@ -112,34 +85,16 @@
         }
 
         // Función de validación de inicio de sesión
-        async function validateLogin() {
-            const username = usernameInput.value.trim().toLowerCase(); // Convertir a minúsculas para evitar errores de mayúsculas
+        function validateLogin() {
+            const username = usernameInput.value.trim();
             const password = passwordInput.value.trim();
 
-            if (storedCredentials[username]) {
-                const passwordHash = await sha256(password);
-
-                // Comparar el hash de la contraseña ingresada con el hash almacenado
-                if (passwordHash === storedCredentials[username]) {
-                    const url = "https://dreamboxmath.vercel.app/inicio.html";
-                    let win = window.open();
-
-                    win.document.body.style.margin = '0';
-                    win.document.body.style.height = '100vh';
-
-                    const iframe = win.document.createElement('iframe');
-                    iframe.style.border = 'none';
-                    iframe.style.width = '100%';
-                    iframe.style.height = '100%';
-                    iframe.style.margin = '0';
-                    iframe.src = url;
-
-                    win.document.body.appendChild(iframe);
-                } else {
-                    alert("Contraseña incorrecta. Inténtelo de nuevo.");
-                }
+            if (storedCredentials[username] && storedCredentials[username] === password) {
+                alert("¡Inicio de sesión exitoso!");
+                // Redirige a la página de destino
+                window.location.href = "https://dreamboxmath.vercel.app/inicio.html";
             } else {
-                alert("Usuario no encontrado. Inténtelo de nuevo.");
+                alert("Usuario o contraseña incorrectos. Inténtelo de nuevo.");
             }
         }
 
