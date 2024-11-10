@@ -20,14 +20,14 @@
         }
         .login-container {
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            background-color: transparent; /* Fondo totalmente transparente */
         }
         .login-input {
             display: block;
-            width: 280px;
+            width: 350px; /* Ancho aumentado */
             padding: 12px;
             margin: 10px auto;
             font-size: 1em;
@@ -91,7 +91,7 @@
         }
 
         async function validateLogin() {
-            const username = usernameInput.value.trim().toLowerCase(); // Convertir a minúsculas para evitar errores de mayúsculas/minúsculas
+            const username = usernameInput.value.trim().toLowerCase();
             const password = passwordInput.value.trim();
 
             if (storedCredentials[username]) {
