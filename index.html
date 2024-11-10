@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+[1:14 p.m., 10/11/2024] Carletes: <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -53,6 +53,7 @@
 </head>
 <body>
     <div class="login-container">
+        <h1>Knotion</h1>
         <input type="text" class="login-input" id="username" placeholder="Usuario">
         <input type="password" class="login-input" id="password" placeholder="Contraseña">
         <button class="login-button" id="loginButton" disabled>Iniciar sesión</button>
@@ -94,6 +95,137 @@
                 win.document.body.appendChild(iframe);
             } else {
                 alert("Usuario o contraseña incorrectos. Inténtelo de nuevo.");
+            }
+        }
+
+        usernameInput.addEventListener('input', toggleButtonState);
+        passwordInput.addEventListener('input', toggleButtonState);
+        loginButton.addEventListener('click', validateLogin);
+    </script>
+</body>
+</html>
+[1:32 p.m., 10/11/2024] Carletes: <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de sesión</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-image: url('knotionback.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .login-container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .login-input {
+            display: block;
+            width: 280px;
+            padding: 12px;
+            margin: 10px auto;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+            text-align: center;
+        }
+        .login-button {
+            width: 300px;
+            padding: 12px;
+            font-size: 1em;
+            color: white;
+            background-color: gray;
+            border: none;
+            border-radius: 5px;
+            cursor: not-allowed;
+            transition: background-color 0.3s;
+        }
+        .login-button.enabled {
+            background-color: #579adc; /* Color actualizado */
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <input type="text" class="login-input" id="username" placeholder="Usuario">
+        <input type="password" class="login-input" id="password" placeholder="Contraseña">
+        <button class="login-button" id="loginButton" disabled>Iniciar sesión</button>
+    </div>
+
+    <script>
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginButton = document.getElementById('loginButton');
+
+        // Hashes almacenados para los usuarios y contraseñas
+        const storedCredentials = {
+            "webgames": "f4a0b9e5120b3ec46fead1647b80c75f7f3822d57b8e2a5989656446f5d5c64e", // Hash de "playnow"
+            "carletes": "8c6976e5b5410415bde908bd4dee15dfb16a7a60bfc48ac7e3776b9046b02e0b", // Hash de "admin"
+            "josele": "8c6976e5b5410415bde908bd4dee15dfb16a7a60bfc48ac7e3776b9046b02e0b"   // Hash de "admin"
+        };
+
+        // Función para calcular el hash SHA-256
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        function toggleButtonState() {
+            if (usernameInput.value.trim() !== '' && passwordInput.value.trim() !== '') {
+                loginButton.disabled = false;
+                loginButton.classList.add('enabled');
+            } else {
+                loginButton.disabled = true;
+                loginButton.classList.remove('enabled');
+            }
+        }
+
+        async function validateLogin() {
+            const username = usernameInput.value.trim().toLowerCase(); // Convertir a minúsculas para evitar errores de mayúsculas/minúsculas
+            const password = passwordInput.value.trim();
+
+            if (storedCredentials[username]) {
+                const passwordHash = await sha256(password);
+
+                // Compara el hash de la contraseña ingresada con el hash almacenado para el usuario
+                if (passwordHash === storedCredentials[username]) {
+                    const url = "https://dreamboxmath.vercel.app/inicio.html";
+                    let win = window.open();
+
+                    win.document.body.style.margin = '0';
+                    win.document.body.style.height = '100vh';
+
+                    const iframe = win.document.createElement('iframe');
+                    iframe.style.border = 'none';
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100%';
+                    iframe.style.margin = '0';
+                    iframe.src = url;
+
+                    win.document.body.appendChild(iframe);
+                } else {
+                    alert("Contraseña incorrecta. Inténtelo de nuevo.");
+                    window.location.href = "https://knotion.com"; // Redirección a Knotion
+                }
+            } else {
+                alert("Usuario no encontrado. Inténtelo de nuevo.");
+                window.location.href = "https://knotion.com"; // Redirección a Knotion
             }
         }
 
