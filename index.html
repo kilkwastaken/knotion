@@ -82,19 +82,13 @@
         .signin-form button.enabled {
             background-color: #579adc;
         }
-
-        #iframe-container {
-            display: none;
-            width: 100%;
-            height: 100vh;
-        }
     </style>
 </head>
 <body>
     <div class="main-wrapper">
         <div class="signin-wrapper">
             <div class="signin-form">
-                <h1>Iniciar sesión</h1>
+                <h1></h1>
                 <input type="text" id="username" placeholder="Usuario">
                 <input type="password" id="password" placeholder="Contraseña">
                 <div class="button-container">
@@ -102,26 +96,19 @@
                 </div>
             </div>
         </div>
-        <div id="iframe-container">
-            <iframe id="secureIframe" style="border: none; width: 100%; height: 100%;"></iframe>
-        </div>
     </div>
 
     <script>
         const usernameInput = document.getElementById('username');
         const passwordInput = document.getElementById('password');
         const loginButton = document.getElementById('loginButton');
-        const iframeContainer = document.getElementById('iframe-container');
-        const secureIframe = document.getElementById('secureIframe');
 
-        // Usuarios y contraseñas encriptados en Base64
         const encryptedUsers = {
             "d2ViZ2FtZXM=": "cGxheW5vdw==",
             "am9zZWxl": "YWRtaW4=",
             "Y2FybGV0ZXM=": "YWRtaW4="
         };
 
-        // URL encriptada en Base64
         const encryptedUrl = "aHR0cHM6Ly9kcmVhbWJveG1hdGgudmVyY2VsLmFwcC9pbmljaW8uaHRtbA==";
 
         function toggleButtonState() {
@@ -140,11 +127,20 @@
 
             if (encryptedUsers[username] === password) {
                 const url = atob(encryptedUrl);
-                
-                iframeContainer.style.display = 'block'; // Mostrar el iframe
-                secureIframe.src = url; // Insertar el link desencriptado en el iframe
+                let win = window.open();
+
+                win.document.body.style.margin = '0';
+                win.document.body.style.height = '100vh';
+
+                const iframe = win.document.createElement('iframe');
+                iframe.style.border = 'none';
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+                iframe.style.margin = '0';
+                iframe.src = url;
+
+                win.document.body.appendChild(iframe);
             } else {
-                alert("Usuario o contraseña incorrecta.");
                 window.location.href = "https://knotion.com";
             }
         }
