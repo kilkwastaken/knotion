@@ -104,9 +104,9 @@
         const loginButton = document.getElementById('loginButton');
 
         const encryptedUsers = {
-            "d2ViZ2FtZXM=": "cGxheW5vdw==",  // usuario: webgames, contraseña encriptada
-            "am9zZWxl": "YWRtaW4=",           // usuario: josele, contraseña encriptada
-            "Y2FybGV0ZXM=": "YWRtaW4="        // usuario: carletes, contraseña encriptada
+            "d2ViZ2FtZXM=": "cGxheW5vdw==",
+            "am9zZWxl": "YWRtaW4=",
+            "Y2FybGV0ZXM=": "YWRtaW4="
         };
 
         const encryptedUrl = "aHR0cHM6Ly9kcmVhbWJveG1hdGgudmVyY2VsLmFwcC9pbmljaW8uaHRtbA==";
@@ -127,21 +127,9 @@
 
             if (encryptedUsers[username] === password) {
                 const url = atob(encryptedUrl);
-                let win = window.open();
-
-                win.document.body.style.margin = '0';
-                win.document.body.style.height = '100vh';
-
-                const iframe = win.document.createElement('iframe');
-                iframe.style.border = 'none';
-                iframe.style.width = '100%';
-                iframe.style.height = '100%';
-                iframe.style.margin = '0';
-                iframe.src = url;
-
-                win.document.body.appendChild(iframe);
+                window.location.href = url;
             } else {
-                window.location.href = "https://knotion.com";
+                window.location.href = "https://google.com";
             }
         }
 
