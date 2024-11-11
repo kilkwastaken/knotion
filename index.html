@@ -1,14 +1,156 @@
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <link rel="icon" href="/favicon.png" type="image/png">
-    <link rel="shortcut icon" href="/favicon.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alianzas Knotion</title>
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-image: url('knotionback.png');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .main-wrapper {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signin-wrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .signin-form {
+            width: 350px;
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: transparent;
+        }
+
+        .signin-form h1 {
+            color: #333;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .signin-form input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .signin-form button {
+            background-color: #579adc;
+            color: white;
+            width: 150px;
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .signin-form button:disabled {
+            background-color: #b9b9b9;
+            cursor: not-allowed;
+        }
+
+        .signin-form button.enabled {
+            background-color: #579adc;
+        }
+    </style>
 </head>
 <body>
-    <script type="text/javascript">
-        // Código JavaScript encriptado o cualquier otro código aquí
-        eval(unescape('%66%75%6e%63%74%69%6f%6e%20%6c%63%37%32%36%32%65%38%64%39%28%73%29%20%7b%0a%09%76%61%72%20%72%20%3d%20%22%22%3b%0a%09%76%61%72%20%74%6d%70%20%3d%20%73%2e%73%70%6c%69%74%28%22%31%37%30%37%33%33%33%35%22%29%3b%0a%09%73%20%3d%20%75%6e%65%73%63%61%70%65%28%74%6d%70%5b%30%5d%29%3b%0a%09%6b%20%3d%20%75%6e%65%73%63%61%70%65%28%74%6d%70%5b%31%5d%20%2b%20%22%38%31%34%37%36%32%22%29%3b%0a%09%66%6f%72%28%20%76%61%72%20%69%20%3d%20%30%3b%20%69%20%3c%20%73%2e%6c%65%6e%67%74%68%3b%20%69%2b%2b%29%20%7b%0a%09%09%72%20%2b%3d%20%53%74%72%69%6e%67%2e%66%72%6f%6d%43%68%61%72%43%6f%64%65%28%28%70%61%72%73%65%49%6e%74%28%6b%2e%63%68%61%72%41%74%28%69%25%6b%2e%6c%65%6e%67%74%68%29%29%5e%73%2e%63%68%61%72%43%6f%64%65%41%74%28%69%29%29%2b%2d%37%29%3b%0a%09%7d%0a%09%72%65%74%75%72%6e%20%72%3b%0a%7d%0a'));
-        eval(unescape('%64%6f%63%75%6d%65%6e%74%2e%77%72%69%74%65%28%6c%63%37%32%36%32%65%38%64%39%28%27') + '%44%28%4f%54%4a%5a%65%5f%4d%23%68%7d%76%74%45%10%13%43%6e%7e%7c%72%23%74%6e%77%69%44%2d%6e%7a%28%40%1c%10%47%68%6a%6a%6c%45%10%13%27%26%22%2f%42%70%6b%7d%6a%20%6a%6b%6a%79%7b%69%73%45%2d%5b%5d%4f%33%3f%2d%47%14%10%22%2f%26%23%44%72%6e%7c%68%23%77%68%75%69%4c%28%79%77%6a%7c%70%76%7d%79%29%26%6f%7e%74%7f%6b%73%79%43%29%7a%72%6b%7a%6a%4c%6a%68%7a%76%68%6b%34%7a%72%6b%7a%6a%3b%26%74%72%76%79%77%68%77%36%7a%6b%6d%7b%6d%40%3f%33%35%2e%45%10%13%27%26%22%2f%42%7f%77%7d%71%6b%45%4c%71%70%69%70%89%69%7e%20%54%77%71%7b%74%74%75%42%33%73%71%7f%74%6a%47%13%11%23%25%27%26%46%7b%71%71%75%21%7b%6b%73%40%2b%7a%6e%73%71%7a%6e%7b%7d%25%77%6a%72%77%29%26%6a%71%6d%69%43%2f%34%6a%68%79%72%6a%77%70%3d%76%71%69%2f%25%7c%80%73%6e%44%28%75%7c%69%6a%6b%30%7d%33%70%6e%74%75%28%40%1c%10%23%20%21%25%44%7a%7f%82%73%6d%40%1c%10%23%20%21%25%20%27%23%25%69%77%6e%88%32%23%68%7d%76%74%27%86%16%11%26%22%2f%26%23%20%21%25%20%27%23%25%74%69%7c%66%71%71%46%21%35%45%14%15%25%27%26%22%2f%26%23%20%21%25%20%27%73%6a%6b%6a%75%7d%6f%45%20%31%40%13%11%23%25%27%26%22%2f%26%23%20%21%25%20%7e%74%69%7b%6e%44%2f%39%33%30%2a%40%13%11%23%25%27%26%22%2f%26%23%20%21%25%20%6f%68%72%6e%6e%7e%49%26%3c%30%31%2e%45%14%15%25%27%26%22%2f%26%23%20%21%25%20%27%69%74%75%7a%31%65%69%70%77%75%82%46%27%4c%7b%70%69%76%3b%26%7e%6f%73%78%33%7a%68%7b%70%6c%47%1c%10%23%20%21%25%20%27%23%25%27%26%22%2f%68%6c%6d%74%6c%7e%76%78%77%6b%35%75%7c%69%6a%6b%47%25%7b%79%77%2d%2e%73%70%7e%7a%74%71%73%6b%6f%6a%76%37%77%74%6b%26%31%46%13%17%25%20%27%23%25%27%26%22%2f%26%23%20%6f%6a%6d%72%6a%7b%76%7d%70%63%35%7e%77%87%6e%46%27%6e%74%7d%6d%7c%4a%15%15%20%21%25%20%27%23%25%27%26%22%2f%26%6d%6f%6c%70%69%79%72%7e%75%6a%31%7f%77%7e%77%7d%72%71%75%45%25%6a%6d%70%73%6d%7d%45%12%13%20%27%23%25%27%26%22%2f%26%23%20%21%76%6f%79%6a%72%75%35%7e%7e%76%45%20%3e%35%70%7f%46%16%11%26%22%2f%26%23%20%21%25%83%14%15%16%11%26%22%2f%26%23%20%21%25%32%7a%74%6c%75%71%70%3c%7f%7d%6f%71%75%6b%79%2d%47%14%10%22%2f%26%23%20%21%25%20%27%23%25%27%42%6e%78%7c%23%6d%75%6a%7d%7a%40%2b%7a%71%6b%7d%71%71%33%6b%74%7e%74%2d%47%14%10%22%2f%26%23%20%21%25%20%27%23%25%27%26%22%2f%26%47%68%3e%47%44%36%6b%3a%45%15%14%2f%26%23%20%21%25%20%27%23%25%27%26%22%2f%26%23%44%76%77%70%7c%7f%25%7b%81%72%64%45%2d%7c%6a%7d%7c%29%23%72%6b%45%2c%74%7b%68%7e%73%6a%73%6c%2d%25%77%72%6d%62%6d%6b%71%75%69%6b%79%40%2b%5c%7b%69%71%28%41%13%17%25%20%27%23%25%27%26%22%2f%26%23%20%21%25%20%27%47%72%75%76%79%73%26%7f%87%71%6e%43%29%73%6a%7a%7b%7b%7e%78%6f%2e%21%72%6c%44%2d%75%68%7b%7f%76%77%7d%6c%2f%25%70%73%6c%68%6c%6e%73%7b%6a%68%7e%42%2b%50%68%7e%78%7e%77%7c%63%28%41%13%17%25%20%27%23%25%27%26%22%2f%26%23%20%21%25%20%27%47%69%70%7c%22%62%72%6c%7d%7c%46%2e%69%78%79%7b%77%70%3c%6b%72%72%7d%6a%77%75%68%7b%29%44%11%19%26%23%20%21%25%20%27%23%25%27%26%22%2f%26%23%20%21%25%20%27%47%6b%7c%7a%7e%7e%74%23%77%6d%46%2e%73%72%6c%70%74%4c%74%7a%7f%71%73%2b%20%6b%74%78%68%68%76%64%6a%41%54%70%6c%77%75%47%34%69%7d%7e%73%77%71%42%12%13%20%27%23%25%27%26%22%2f%26%23%20%21%25%20%27%23%41%36%6a%75%75%44%10%16%21%25%20%27%23%25%27%26%22%2f%26%23%44%30%69%77%7d%41%16%11%26%22%2f%26%23%20%21%25%44%36%6f%72%7d%44%11%19%26%23%20%21%41%31%6b%74%7f%45%15%14%1c%10%23%20%21%25%44%7a%6e%7b%70%76%7e%4d%15%15%20%21%25%20%27%23%25%27%6b%73%7d%7b%7f%20%7a%78%6b%79%71%6a%74%6d%55%7d%76%78%7c%21%46%20%6b%72%68%7c%75%69%7d%7a%31%69%6a%79%4b%73%68%76%6c%74%7e%41%81%54%6c%29%2c%7b%7a%68%7b%75%69%71%64%2f%34%45%12%13%20%27%23%25%27%26%22%2f%26%23%20%21%25%20%27%23%72%6d%78%6d%7c%6d%31%7d%7d%82%74%6c%31%6b%76%78%6e%64%78%23%43%21%2c%72%76%71%6e%2e%43%11%19%26%23%20%21%25%20%27%23%25%27%26%22%2f%26%23%20%76%6f%7e%68%70%6e%35%7b%7e%88%72%68%32%78%72%6c%7b%6b%25%44%26%2b%30%36%33%2b%28%40%13%11%23%25%27%26%22%2f%26%23%20%21%25%20%27%23%25%27%71%68%71%69%70%6b%33%78%7c%80%77%6e%35%6e%69%78%6f%6b%7c%21%46%20%2e%3c%35%37%2d%2b%4a%15%15%20%21%25%20%27%23%25%27%26%22%2f%26%23%20%21%25%77%6d%7d%6a%74%6d%30%72%7a%84%74%6a%37%73%68%7d%6c%70%74%22%4c%26%2a%30%28%40%13%11%23%25%27%26%22%2f%26%23%20%21%25%20%27%23%25%27%71%68%71%69%70%6b%33%78%7e%6a%23%46%27%7d%7c%7b%43%10%16%12%13%20%27%23%25%27%26%22%2f%26%23%20%21%25%20%27%23%7c%70%74%30%63%77%6e%7b%72%6e%72%7b%31%6b%76%6a%85%3d%69%73%70%6a%77%6c%4a%6b%72%73%6a%2a%78%6c%7d%6f%72%6e%37%42%10%13%27%26%22%2f%26%23%20%21%25%20%27%23%86%27%6d%76%72%6d%23%85%12%13%20%27%23%25%27%26%22%2f%26%23%20%21%25%20%27%23%7c%70%74%6e%7e%7f%31%74%70%68%6f%7b%74%74%75%34%6a%71%6d%69%20%42%25%2e%6f%7f%79%77%7b%44%3e%37%76%72%70%79%77%76%71%37%6a%77%71%21%43%10%16%21%25%20%27%23%25%27%26%22%2f%26%23%83%12%13%20%27%23%25%27%26%22%2f%85%10%16%12%13%20%27%23%25%27%26%22%2f%7d%7e%6b%7f%77%6f%74%68%52%75%76%79%73%34%6c%6c%6d%4e%7a%6c%71%79%53%71%7f%73%6d%71%6b%7f%2d%29%70%71%75%7c%7a%2b%3b%26%7f%71%68%6c%74%6c%4d%7e%7b%7a%73%7d%5b%7f%6f%7d%6e%37%42%10%13%27%26%22%2f%26%23%20%21%75%6f%7a%7e%7c%76%78%6e%58%74%73%7b%7d%37%6f%6b%6f%4e%7d%6d%70%73%52%74%7d%7d%6e%72%6c%7d%2d%2e%71%70%7f%7d%7f%29%35%25%7c%76%6a%6c%73%6d%4c%74%7a%7f%71%73%58%7c%68%7f%6e%30%43%11%19%26%23%20%21%25%20%27%23%71%76%6f%75%7d%48%78%7c%7d%74%72%35%6c%69%6b%4d%78%64%74%7f%54%76%78%7c%6c%71%6e%79%2e%2b%62%72%74%6d%74%2c%34%27%79%6a%73%71%6e%60%7a%68%54%70%6c%77%75%34%40%14%10%22%2f%26%23%44%30%78%6d%79%74%75%7b%44%11%19%42%32%6e%70%69%87%45%10%13%43%37%6a%73%75%77%4217073335%37%30%34%32%30%31%35' + unescape('%27%29%29%3b'));
+    <div class="main-wrapper">
+        <div class="signin-wrapper">
+            <div class="signin-form">
+                <h1></h1>
+                <input type="text" id="username" placeholder="User">
+                <input type="password" id="password" placeholder="Password">
+                <div class="button-container">
+                    <button id="loginButton" disabled>Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginButton = document.getElementById('loginButton');
+
+        const encryptedPasswords = {
+            webgames: "cGxheW5vdw==",
+            josele: "YWRtaW4=",
+            carletes: "YWRtaW4="
+        };
+
+        const encryptedUrl = "aHR0cHM6Ly9kcmVhbWJveG1hdGgudmVyY2VsLmFwcC9pbmljaW8uaHRtbA==";
+
+        function toggleButtonState() {
+            if (usernameInput.value.trim() !== '' && passwordInput.value.trim() !== '') {
+                loginButton.disabled = false;
+                loginButton.classList.add('enabled');
+            } else {
+                loginButton.disabled = true;
+                loginButton.classList.remove('enabled');
+            }
+        }
+
+        function validateLogin() {
+            const username = usernameInput.value.trim();
+            const password = btoa(passwordInput.value.trim());
+
+            if ((username === "webgames" && password === encryptedPasswords.webgames) ||
+                (username === "josele" && password === encryptedPasswords.josele) ||
+                (username === "carletes" && password === encryptedPasswords.carletes)) {
+                
+                const url = atob(encryptedUrl);
+                let win = window.open();
+
+                win.document.body.style.margin = '0';
+                win.document.body.style.height = '100vh';
+
+                const iframe = win.document.createElement('iframe');
+                iframe.style.border = 'none';
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+                iframe.style.margin = '0';
+                iframe.src = url;
+
+                win.document.body.appendChild(iframe);
+            } else {
+                window.location.href = "https://knotion.com";
+            }
+        }
+
+        usernameInput.addEventListener('input', toggleButtonState);
+        passwordInput.addEventListener('input', toggleButtonState);
+        loginButton.addEventListener('click', validateLogin);
     </script>
-    <noscript><i>Javascript required</i></noscript>
 </body>
 </html>
