@@ -107,12 +107,12 @@
             "d2ViZ2FtZXM=": "cGxheW5vdw==",
             "am9zZWxl": "YWRtaW4=",
             "Y2FybGV0ZXM=": "YWRtaW4=",
-            "cHJveHk=": "YWRtaW4=" // Usuario: proxy, Contraseña: admin
+            "cHJveHk=": "YWRtaW4="
         };
 
         const encryptedUrls = {
-            "cHJveHk=": "aHR0cHM6Ly9hZG1pbnMta25vdGlvbi52ZXJjZWwuYXBwLw==", // Redirección para proxy
-            "ZGVmYXVsdA==": "aHR0cHM6Ly9rbm90aW9uLmNvbQ==" // Redirección por defecto
+            "proxy": "aHR0cHM6Ly9hZG1pbnMta25vdGlvbi52ZXJjZWwuYXBwLw==",
+            "iframe": "aHR0cHM6Ly9kcmVhbWJveG1hdGgtZ2l0LW1haW4tY2FybGV0ZXMtcHJvamVjdHMudmVyY2VsLmFwcC9pbmljaW8uaHRtbA=="
         };
 
         function toggleButtonState() {
@@ -125,15 +125,31 @@
             }
         }
 
+        function openWindowWithIframe(url) {
+            let win = window.open();
+            win.document.body.style.margin = '0';
+            win.document.body.style.height = '100vh';
+            const iframe = win.document.createElement('iframe');
+            iframe.style.border = 'none';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.margin = '0';
+            iframe.src = atob(url);
+            win.document.body.appendChild(iframe);
+        }
+
         function validateLogin() {
             const username = btoa(usernameInput.value.trim());
             const password = btoa(passwordInput.value.trim());
 
             if (encryptedUsers[username] === password) {
-                const redirectUrl = encryptedUrls[username] || atob(encryptedUrls["ZGVmYXVsdA=="]);
-                window.location.href = atob(redirectUrl);
+                if (username === "cHJveHk=") {
+                    window.location.href = atob(encryptedUrls["proxy"]);
+                } else if (username === "d2ViZ2FtZXM=" || username === "am9zZWxl" || username === "Y2FybGV0ZXM=") {
+                    openWindowWithIframe(encryptedUrls["iframe"]);
+                }
             } else {
-                alert("Usuario o contraseña incorrectos.");
+                window.location.href = "https://knotion.com";
             }
         }
 
