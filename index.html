@@ -88,7 +88,7 @@
     <div class="main-wrapper">
         <div class="signin-wrapper">
             <div class="signin-form">
-                <h1></h1>
+                <h1>Inicio de Sesión</h1>
                 <input type="text" id="username" placeholder="Usuario">
                 <input type="password" id="password" placeholder="Contraseña">
                 <div class="button-container">
@@ -104,14 +104,14 @@
         const loginButton = document.getElementById('loginButton');
 
         const encryptedUsers = {
-            "d2ViZ2FtZXM=": "cGxheW5vdw==",
-            "am9zZWxl": "YWRtaW4=",
-            "cHJveHk=": "YWRtaW4="
+            "cHJveHk=": "YWRtaW4=", // Usuario: proxy, Contraseña: admin
+            "aW50ZXJzdGVsbGFy": "YWRtaW4=", // Usuario: interstellar, Contraseña: admin
+            "am9zZWxl": "c2VjcmV0" // Usuario: josele, Contraseña: secret
         };
 
         const encryptedUrls = {
-            "cHJveHk=": "aHR0cHM6Ly9hZG1pbnMta25vdGlvbi52ZXJjZWwuYXBwLw==",
-            "ZGVmYXVsdA==": "aHR0cHM6Ly9rbm90aW9uLmNvbQ=="
+            "cHJveHk=": "aHR0cHM6Ly9hZG1pbnMta25vdGlvbi52ZXJjZWwuYXBwLw==", // Redirección para proxy
+            "ZGVmYXVsdA==": "aHR0cHM6Ly9rbm90aW9uLmNvbQ==" // Redirección por defecto
         };
 
         function toggleButtonState() {
